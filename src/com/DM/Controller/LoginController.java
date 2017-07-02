@@ -6,12 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.portlet.ModelAndView;
 
 import com.DM.delegate.LoginDelegate;
 import com.DM.entity.Users;
 
 @Controller
+@RequestMapping("/user")
 public class LoginController
 {
 	
@@ -20,6 +23,7 @@ public class LoginController
 			
 			Users user = new Users();
 			
+//			@RequestMapping(value="/login",method=RequestMethod.GET)
 			@GetMapping(value="/login")
 			public ModelAndView displayLogin(HttpServletRequest request,HttpServletResponse response)
 			{
