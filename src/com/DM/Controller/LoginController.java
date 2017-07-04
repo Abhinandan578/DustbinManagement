@@ -4,13 +4,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.portlet.ModelAndView;
 
-import com.DM.delegate.LoginDelegate;
+import com.DM.Service.UserService;
 import com.DM.entity.Users;
 
 @Controller
@@ -19,45 +19,48 @@ public class LoginController
 {
 	
 			@Autowired
-			private LoginDelegate loginDelegate;
+			private UserService userService;
 			
-			Users user = new Users();
 			
-//			@RequestMapping(value="/login",method=RequestMethod.GET)
-			@GetMapping(value="/login")
-			public ModelAndView displayLogin(HttpServletRequest request,HttpServletResponse response)
+			
+			@GetMapping("/login")
+//			@ModelAttribute("user")
+			public String displayLogin(@ModelAttribute("user") Users theUser,HttpServletRequest request,HttpServletResponse response,Model theModel)
 			{
-					ModelAndView model = new ModelAndView("login");
-					
-					model.addObject("Users",user);
-					return model;
+					Users theNewUser = new Users();
+					theModel.addAttribute("myuser",theNewUser);
+					theModel.addAttribute("user",new Users());
+					return "delete";
 			}
 			
-			@PostMapping(value="/login")
-			public ModelAndView executeLogin(HttpServletRequest request,HttpServletResponse response)
+			@PostMapping("/login")
+			public String executeLogin(HttpServletRequest request,HttpServletResponse response,Model theModel)
 			{
-						ModelAndView model=null;
+						String retString=new String();
 						try
 						{
-								boolean isValidUser = loginDelegate.isValidUser(user.getId(),user.getPassword());
+								Users theUser = new Users();
+								
+								boolean isValidUser = userService.isValidUser(theUser.getId(),theUser.getPassword());
 								if(isValidUser)
 								{
 										System.out.println("User Login Succesful");
-										request.setAttribute("loggedInUser", user.getId());
-										model = new ModelAndView("Welcome");
+										request.setAttribute("loggedInUser", theUser.getId());
+										retString= "Welcome";
 								}
 								else
 								{
-										model = new ModelAndView("login");
-										model.addObject("Users", user);
+
+										theModel.addAttribute("user", theUser);
 										request.setAttribute("message", "Invalid credentials!!");
+										retString="login";
 								}
 						}
 						catch(Exception e)
 						{
 								e.printStackTrace();
 						}
-						return model;
+						return retString;
 			}
 }
 

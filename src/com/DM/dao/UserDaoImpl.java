@@ -3,7 +3,7 @@ package com.DM.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.persistence.Query;
+import org.hibernate.query.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -25,7 +25,7 @@ public class UserDaoImpl implements UserDao {
 				Session currentSession = sessionFactory.getCurrentSession();
 				
 				// Query
-				Query theQuery = currentSession.createQuery("From users u where u.id=:userid and u.passwordUser=:passwd ",Users.class);
+				Query<Users> theQuery = currentSession.createQuery("From users u where u.id=:userid and u.passwordUser=:passwd ",Users.class);
 				theQuery.setParameter("userid", id);
 				theQuery.setParameter("passwd", password);
 				List results=theQuery.getResultList();
