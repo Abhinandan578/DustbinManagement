@@ -25,7 +25,7 @@ public class LoginController
 			
 			@GetMapping("/login")
 //			@ModelAttribute("user")
-			public String displayLogin(@ModelAttribute("user") Users theUser,HttpServletRequest request,HttpServletResponse response,Model theModel)
+			public String displayLogin(HttpServletRequest request,HttpServletResponse response,Model theModel)
 			{
 					Users theNewUser = new Users();
 					theModel.addAttribute("myuser",theNewUser);
