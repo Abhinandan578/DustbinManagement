@@ -1,6 +1,7 @@
 package com.DM.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.DM.dao.UserDao;
+import com.DM.entity.Users;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,6 +30,34 @@ public class UserServiceImpl implements UserService {
 		public boolean isValidUser(String id, String password) throws SQLException {
 			
 					return userDao.isValidUser(id,password) ;
+		}
+		@Override
+		@Transactional
+		public List<Users> getCollectors() {
+			
+			return userDao.getCollectors();
+			
+		}
+		@Override
+		public List<Users> getCaretakers() {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		@Transactional
+		public void saveUser(Users theuser) {
+			userDao.saveUser(theuser);
+			
+		}
+		@Override
+		public Users getUser(int theId) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+		@Override
+		public void deleteUser(int theId) {
+			// TODO Auto-generated method stub
+			
 		}
 
 }

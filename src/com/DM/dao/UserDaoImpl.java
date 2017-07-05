@@ -34,4 +34,43 @@ public class UserDaoImpl implements UserDao {
 				//errors in this file
 	}
 
+	@Override
+	public List<Users> getCollectors() {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query<Users> theQuery = currentSession.createQuery("from Users ",Users.class);
+		
+		List<Users> users = (List<Users>)theQuery.getResultList();
+		return users;
+		
+	}
+
+	@Override
+	public List<Users> getCaretakers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void saveUser(Users theUser) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		currentSession.save(theUser);
+		
+	}
+
+	@Override
+	public Users getUser(int theId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteUser(int theId) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
