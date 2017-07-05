@@ -54,7 +54,7 @@ public class LoginController
 
 										theModel.addAttribute("user", theUser);
 										request.setAttribute("message", "Invalid credentials!!");
-										retString="login";
+										retString="delete";
 								}
 						}
 						catch(Exception e)
