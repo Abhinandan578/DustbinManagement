@@ -3,7 +3,7 @@
 <html>
 
 <head>
-<title>List-customers</title>
+<title>List-users</title>
 
 <!-- link jsp page with css style -->
 	<link type="text/css"
@@ -16,7 +16,7 @@
 	<div id="wrapper">
 	
 		<div id="header">
-			<h2>LIST OF CARE-TAKERS</h2>
+			<h2>LIST OF DUSTBIN COLLECTORS</h2>
 		</div>
 	</div>
 	
@@ -30,12 +30,12 @@
 			class="add-button"/>
 			<table>
 			 <tr>
+				<th>Id</th>
 				<th>Name</th>
-				<th>LastName</th>
-				<th>Email</th>
+				<th>Dustbin ID</th>
 			 </tr>
 			
-			 <c:forEach var="temp" items="${users}">
+			 <c:forEach var="temp" items="${user}">
 			
 				<!-- update link -->
 				<c:url var="updateLink" value="/user/showFormForUpdate">
@@ -44,7 +44,7 @@
 				
 				</c:url>
 				
-				<c:url var="deleteLink" value="/customer/delete">
+				<c:url var="deleteLink" value="/user/delete">
 				
 					<c:param name="customerId" value="${temp.id}" />
 				

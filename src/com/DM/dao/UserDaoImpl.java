@@ -25,12 +25,15 @@ public class UserDaoImpl implements UserDao {
 				Session currentSession = sessionFactory.getCurrentSession();
 				
 				// Query
-				Query<Users> theQuery = currentSession.createQuery("From users u where u.id=:userid and u.passwordUser=:passwd ",Users.class);
+				Query<Users> theQuery = currentSession.createQuery("From Users u where u.id=:userid and u.passwordUser=:passwd ",Users.class);
 				theQuery.setParameter("userid", id);
 				theQuery.setParameter("passwd", password);
-				List results=theQuery.getResultList();
+				List<Users> results=theQuery.getResultList();
+				
 				Users user = (Users)results.get(0);
+				if(results.size()!=1)
 				return false;
+				return true;
 				//errors in this file
 	}
 
@@ -39,9 +42,11 @@ public class UserDaoImpl implements UserDao {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<Users> theQuery = currentSession.createQuery("from Users ",Users.class);
+		Query<Users> theQuery = currentSession.createQuery("From Users ",Users.class);
 		
 		List<Users> users = (List<Users>)theQuery.getResultList();
+		
+		
 		return users;
 		
 	}

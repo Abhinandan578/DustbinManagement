@@ -24,7 +24,15 @@
 		<form:hidden path="id" />
 		<table>
 			<tbody>
-				<tr>
+			
+					
+			
+					<tr>
+					<td><label> Dustbin : </label></td>
+					<td><form:input path="dustbinId"/></td>
+					</tr>
+					
+					<tr>
 				
 				
 					<td><label> Name : </label></td>
@@ -43,10 +51,6 @@
 					<td><form:input path="typeOfUser"/></td>
 					</tr>
 					
-					<tr>
-					<td><label> Dustbin : </label></td>
-					<td><form:input path="dustbinId"/></td>
-					</tr>
 					
 					<tr>
 					<td><label></label></td>
@@ -61,7 +65,7 @@
 		
 		<p>
 		
-		<a href="${pageContext.request.contextPath}/user/listController">Back to List</a>
+		<a href="${pageContext.request.contextPath}/listController">Back to List</a>
 		
 		</p>
 		

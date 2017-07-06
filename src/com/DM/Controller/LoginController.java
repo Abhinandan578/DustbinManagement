@@ -41,7 +41,7 @@ public class LoginController
 						try
 						{
 								Users theUser = new Users();
-								
+								System.out.println(theUser.getId() + theUser.getPassword());
 								boolean isValidUser = userService.isValidUser(theUser.getId(),theUser.getPassword());
 								if(isValidUser)
 								{
@@ -66,7 +66,7 @@ public class LoginController
 			
 			
 			@RequestMapping("/listCollector")
-			@ModelAttribute("user")
+			//@ModelAttribute("user")
 			public String listCollectors(Model theModel)
 			{
 				List<Users> theUser= userService.getCollectors();
@@ -95,9 +95,9 @@ public class LoginController
 				return "user-form";
 			}
 			
-			@RequestMapping("/saveUser")
+			@PostMapping("/saveUser")
 			public String saveUser(@ModelAttribute("user") Users theUser)
-			{
+			{System.out.println(theUser);
 				userService.saveUser(theUser);
 				
 				return "redirect:/user/listCollector";
