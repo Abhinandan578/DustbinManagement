@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.DM.Service.UserService;
 import com.DM.entity.Users;
@@ -25,43 +26,44 @@ public class LoginController
 			private UserService userService;
 			
 			@GetMapping("/login")
-//			@ModelAttribute("user")
 			public String displayLogin(HttpServletRequest request,HttpServletResponse response,Model theModel)
 			{
 					Users theNewUser = new Users();
-					theModel.addAttribute("myuser",theNewUser);
-					theModel.addAttribute("user",new Users());
+					theModel.addAttribute("user", theNewUser);
 					return "delete";
 			}
 			
 			@PostMapping("/login")
-			public String executeLogin(HttpServletRequest request,HttpServletResponse response,Model theModel)
+			public ModelAndView executeLogin(HttpServletRequest request,HttpServletResponse response,@ModelAttribute("user") Users theUser)
 			{
 						String retString=new String();
+						ModelAndView theModel=null;
+						
 						try
 						{
-								Users theUser = new Users();
-								System.out.println(theUser.getId() + theUser.getPassword());
-								boolean isValidUser = userService.isValidUser(theUser.getId(),theUser.getPassword());
+								request.setAttribute("loggedInUser", theUser.getId());
+								System.out.println(theUser.getId() + theUser.getPasswordUser());
+								boolean isValidUser = userService.isValidUser(theUser.getId(),theUser.getPasswordUser());
 								if(isValidUser)
 								{
 										System.out.println("User Login Succesful");
 										request.setAttribute("loggedInUser", theUser.getId());
-										retString= "Welcome";
+										theModel=new ModelAndView("welcome");
 								}
 								else
 								{
 
-										theModel.addAttribute("user", theUser);
+										theModel.addObject("user", theUser);
 										request.setAttribute("message", "Invalid credentials!!");
-										retString="login";
+										theModel=new ModelAndView("listCollector");
 								}
 						}
 						catch(Exception e)
 						{
 								e.printStackTrace();
 						}
-						return retString;
+						return theModel;
+
 			}
 			
 			

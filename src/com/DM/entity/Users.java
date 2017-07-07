@@ -20,7 +20,7 @@ public class Users {
 	private int typeOfUser;
 	
 	@Column(name="passwordUser")
-	private String password;
+	private String passwordUser;
 	
 	@Column(name="name")
 	private String name;
@@ -44,12 +44,12 @@ public class Users {
 		this.typeOfUser = typeOfUser;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getPasswordUser() {
+		return passwordUser;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setPasswordUser(String passwordUser) {
+		this.passwordUser = passwordUser;
 	}
 
 	public String getName() {
@@ -70,9 +70,10 @@ public class Users {
 
 	@Override
 	public String toString() {
-		return "Users [id=" + id + ", typeOfUser=" + typeOfUser + ", password=" + password + ", name=" + name
+		return "Users [id=" + id + ", typeOfUser=" + typeOfUser + ", passwordUser=" + passwordUser + ", name=" + name
 				+ ", dustbinId=" + dustbinId + "]";
 	}
+
 	
 
 }

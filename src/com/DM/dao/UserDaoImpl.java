@@ -30,11 +30,11 @@ public class UserDaoImpl implements UserDao {
 				theQuery.setParameter("passwd", password);
 				List<Users> results=theQuery.getResultList();
 				
-				Users user = (Users)results.get(0);
+				//Users user = (Users)results.get(0);
 				if(results.size()!=1)
-				return false;
-				return true;
-				//errors in this file
+					return false;
+				else
+					return true;
 	}
 
 	@Override

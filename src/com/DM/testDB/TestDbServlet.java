@@ -24,7 +24,7 @@ public class TestDbServlet extends HttpServlet {
 		
 		//setup connection variables
 		String user="spring";
-		String pass = "spring";
+		String pass = "Spring@123";
 		
 		String jdbcUrl = "jdbc:mysql://localhost:3306/tyros?useSSL=false";
 		String driver = "com.mysql.jdbc.Driver";
