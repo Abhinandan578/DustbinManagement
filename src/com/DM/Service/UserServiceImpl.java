@@ -39,9 +39,11 @@ public class UserServiceImpl implements UserService {
 			
 		}
 		@Override
+		@Transactional
 		public List<Users> getCaretakers() {
-			// TODO Auto-generated method stub
-			return null;
+			
+			return userDao.getCaretakers();
+			
 		}
 		@Override
 		@Transactional

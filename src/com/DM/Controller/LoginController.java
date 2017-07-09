@@ -77,12 +77,12 @@ public class LoginController
 			}
 			
 			@RequestMapping("/listCareTaker")
-			public String listusers(Model theModel)
+			public String listCaretakers(Model theModel)
 			{
 				List<Users> theuser= userService.getCaretakers();
 				
 				theModel.addAttribute("user",theuser);
-				return "list-customers";
+				return "listCaretaker";
 			}
 			
 			@GetMapping("/showFormForAdd")

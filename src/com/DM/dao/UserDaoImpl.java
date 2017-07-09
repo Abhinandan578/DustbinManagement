@@ -42,7 +42,7 @@ public class UserDaoImpl implements UserDao {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<Users> theQuery = currentSession.createQuery("From Users ",Users.class);
+		Query<Users> theQuery = currentSession.createQuery("From Users u where u.typeOfUser = 1",Users.class);
 		
 		List<Users> users = (List<Users>)theQuery.getResultList();
 		
@@ -53,8 +53,15 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public List<Users> getCaretakers() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query<Users> theQuery = currentSession.createQuery("From Users u where u.typeOfUser = 2",Users.class);
+		
+		List<Users> users = (List<Users>)theQuery.getResultList();
+		
+		
+		return users;
 	}
 
 	@Override
