@@ -25,7 +25,7 @@
 		<div id="content">
 		
 		<!-- add button -->
-		<input type="button" value="Add Customer"
+		<input type="button" value="Add Collector"
 			onclick="window.location.href='showFormForAdd'; return false;" 
 			class="add-button"/>
 			<table>
@@ -40,13 +40,13 @@
 				<!-- update link -->
 				<c:url var="updateLink" value="/user/showFormForUpdate">
 				
-					<c:param name="customerId" value="${temp.id}" />
+					<c:param name="userId" value="${temp.id}" />
 				
 				</c:url>
 				
 				<c:url var="deleteLink" value="/user/delete">
 				
-					<c:param name="customerId" value="${temp.id}" />
+					<c:param name="userId" value="${temp.id}" />
 				
 				</c:url>
 				

@@ -30,32 +30,45 @@ public class LoginController
 			{
 					Users theNewUser = new Users();
 					theModel.addAttribute("user", theNewUser);
-					return "delete";
+					return "login";
 			}
 			
 			@PostMapping("/login")
 			public ModelAndView executeLogin(HttpServletRequest request,HttpServletResponse response,@ModelAttribute("user") Users theUser)
 			{
-						String retString=new String();
 						ModelAndView theModel=null;
 						
 						try
 						{
-								request.setAttribute("loggedInUser", theUser.getId());
-								System.out.println(theUser.getId() + theUser.getPasswordUser());
 								boolean isValidUser = userService.isValidUser(theUser.getId(),theUser.getPasswordUser());
 								if(isValidUser)
 								{
+									   theUser=userService.getUser(theUser.getId());
+									    System.out.println(theUser.toString());
 										System.out.println("User Login Succesful");
-										request.setAttribute("loggedInUser", theUser.getId());
-										theModel=new ModelAndView("welcome");
+										request.setAttribute("loggedInUser", theUser.getName());
+										if(theUser.getTypeOfUser()==1)
+										{
+												theModel=new ModelAndView("admin_welcome");
+												System.out.println("User 1 admin");
+										}
+										else if(theUser.getTypeOfUser()==2)
+										{
+												theModel=new ModelAndView("collector_welcome");
+												System.out.println("User 2 collector");
+										}
+										else if(theUser.getTypeOfUser()==3)
+										{
+												theModel=new ModelAndView("caretaker_welcome");
+												System.out.println("User 3 caretaker");
+										}
 								}
 								else
 								{
 
 										theModel.addObject("user", theUser);
 										request.setAttribute("message", "Invalid credentials!!");
-										theModel=new ModelAndView("listCollector");
+										theModel=new ModelAndView("login");
 								}
 						}
 						catch(Exception e)
@@ -112,16 +125,16 @@ public class LoginController
 				
 				theModel.addAttribute("user" , theuser);
 				
-				return "redirect:/user/list";
+				return "user-form";
 			}
 			
 			
 			@GetMapping("/delete")
-			public String delete(@RequestParam("userId") int theId,Model theModel)
+			public String deleteUser(@RequestParam("userId") int theId)
 			{
 				userService.deleteUser(theId);
 				
-				return "redirect:/user/list";
+				return "redirect:/user/listCollector";
 			}
 			
 }
