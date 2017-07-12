@@ -42,7 +42,7 @@
 					
 					<tr>
 					<td><label> Password : </label></td>
-					<td><form:input path="password"/></td>
+					<td><form:input path="passwordUser"/></td>
 					
 					</tr>
 					
@@ -57,7 +57,6 @@
 					<td><input type="submit" value="save" class="save"/></td>
 					</tr>
 					
-				</tr>
 			</tbody>
 		</table>	
 		

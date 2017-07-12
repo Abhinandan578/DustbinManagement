@@ -16,7 +16,7 @@
 	<div id="wrapper">
 	
 		<div id="header">
-			<h2>LIST OF DUSTBIN COLLECTORS</h2>
+			<h2>LIST OF DUSTBIN CARETAKERS</h2>
 		</div>
 	</div>
 	
@@ -25,7 +25,7 @@
 		<div id="content">
 		
 		<!-- add button -->
-		<input type="button" value="Add Collector"
+		<input type="button" value="Add CareTaker"
 			onclick="window.location.href='showFormForAdd'; return false;" 
 			class="add-button"/>
 			<table>
@@ -56,7 +56,7 @@
 				<td>${temp.dustbinId}</td>
 				<td> <a href="${updateLink}">Update</a></td>
 				<td> <a href="${deleteLink}"
-					onclick = "if(!(confirm('Are you sure want to dlete this customer'))) return false">Delete</a></td>
+					onclick = "if(!(confirm('Are you sure want to delete this customer'))) return false">Delete</a></td>
 				
 			</tr>
 			 </c:forEach>

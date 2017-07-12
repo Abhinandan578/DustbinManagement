@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,7 +26,7 @@ public class UserServiceImpl implements UserService {
 		}
 		@Override
 		@Transactional
-		public boolean isValidUser(String id, String password) throws SQLException {
+		public boolean isValidUser(int id, String password) throws SQLException {
 			
 					return userDao.isValidUser(id,password) ;
 		}
@@ -52,13 +51,14 @@ public class UserServiceImpl implements UserService {
 			
 		}
 		@Override
+		@Transactional
 		public Users getUser(int theId) {
-			// TODO Auto-generated method stub
-			return null;
+			return userDao.getUser(theId);
 		}
 		@Override
+		@Transactional
 		public void deleteUser(int theId) {
-			// TODO Auto-generated method stub
+			userDao.deleteUser(theId);
 			
 		}
 

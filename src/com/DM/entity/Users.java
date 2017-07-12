@@ -14,7 +14,7 @@ public class Users {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id")
-	private String id;
+	private int  id;
 	
 	@Column(name="typeOfUser")
 	private int typeOfUser;
@@ -28,11 +28,11 @@ public class Users {
 	@Column(name="dustbinId")
 	private int dustbinId;
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
