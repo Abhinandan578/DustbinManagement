@@ -7,7 +7,7 @@ import com.DM.entity.Users;
 
 public interface UserDao {
 
-		public boolean isValidUser(String id,String password) throws SQLException;
+		public boolean isValidUser(int id,String password) throws SQLException;
 		
 		public List<Users> getCollectors();
 

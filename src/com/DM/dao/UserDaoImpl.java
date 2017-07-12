@@ -19,7 +19,7 @@ public class UserDaoImpl implements UserDao {
 		private SessionFactory sessionFactory;
 
 	@Override
-		public boolean isValidUser(String id, String password) throws SQLException {
+		public boolean isValidUser(int id, String password) throws SQLException {
 		
 				 //get the current hibernate session
 				Session currentSession = sessionFactory.getCurrentSession();
@@ -42,10 +42,9 @@ public class UserDaoImpl implements UserDao {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<Users> theQuery = currentSession.createQuery("From Users u where u.typeOfUser = 1",Users.class);
+		Query<Users> theQuery = currentSession.createQuery("From Users u where u.typeOfUser = 2",Users.class);
 		
 		List<Users> users = (List<Users>)theQuery.getResultList();
-		
 		
 		return users;
 		
@@ -56,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		Query<Users> theQuery = currentSession.createQuery("From Users u where u.typeOfUser = 2",Users.class);
+		Query<Users> theQuery = currentSession.createQuery("From Users u where u.typeOfUser = 3",Users.class);
 		
 		List<Users> users = (List<Users>)theQuery.getResultList();
 		
@@ -69,20 +68,31 @@ public class UserDaoImpl implements UserDao {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		
-		currentSession.save(theUser);
+		currentSession.saveOrUpdate(theUser);
 		
 	}
 
+	
 	@Override
 	public Users getUser(int theId) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		//get the current hibernate session
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		//now read from database using the primary key
+		Users theUser = currentSession.get(Users.class, theId);
+
+		return theUser;
 	}
+
 
 	@Override
 	public void deleteUser(int theId) {
-		// TODO Auto-generated method stub
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query theQuery = currentSession.createQuery("delete from Users where id=:userId");
+		theQuery.setParameter("userId",theId );
 		
+		theQuery.executeUpdate();
 	}
 
 }
