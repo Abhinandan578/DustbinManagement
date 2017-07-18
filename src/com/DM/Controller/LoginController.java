@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.DM.Service.UserService;
+import com.DM.entity.Dustbin;
 import com.DM.entity.Users;
 
 @Controller
@@ -27,7 +28,7 @@ public class LoginController
 			
 			@GetMapping("/login")
 			public String displayLogin(HttpServletRequest request,HttpServletResponse response,Model theModel)
-			{
+			{System.out.println("--");					
 					Users theNewUser = new Users();
 					theModel.addAttribute("user", theNewUser);
 					return "login";
@@ -47,6 +48,7 @@ public class LoginController
 									    System.out.println(theUser.toString());
 										System.out.println("User Login Succesful");
 										request.setAttribute("loggedInUser", theUser.getName());
+										request.setAttribute("userId", theUser.getId());
 										if(theUser.getTypeOfUser()==1)
 										{
 												theModel=new ModelAndView("admin_welcome");
@@ -109,7 +111,15 @@ public class LoginController
 				
 				return "user-form";
 			}
-			
+			@GetMapping("/showFormForAddDustbin")
+			public String showFormForAddDustbin(Model theModel)
+			{
+				Users theUser = new Users();
+				
+				theModel.addAttribute("user" , theUser);
+				
+				return "dustbin-form";
+			}
 			@PostMapping("/saveUser")
 			public String saveUser(@ModelAttribute("user") Users theUser)
 			{System.out.println(theUser);
@@ -118,6 +128,13 @@ public class LoginController
 				return "redirect:/user/listCollector";
 			}
 			
+			@PostMapping("/saveDustbin")
+			public String saveDustbin(@ModelAttribute("user") Dustbin theUser)
+			{System.out.println(theUser);
+				userService.saveDustbin(theUser);
+				
+				return "redirect:/user/listCollector";
+			}
 			@GetMapping("/showFormForUpdate")
 			public String showFormForUpdate(@RequestParam("userId") int theId,Model theModel)
 			{
@@ -135,6 +152,39 @@ public class LoginController
 				userService.deleteUser(theId);
 				
 				return "redirect:/user/listCollector";
+			}
+			/*@GetMapping("/listDustbin")
+			public String listDustbin(@RequestParam("userId") int theId,Model theModel)
+			{System.out.println("**");
+				List<Dustbin> theuser = userService.getDustbin(theId);
+				
+				theModel.addAttribute("user" , theuser);
+				
+				System.out.println("**");
+				return "listDustbin";
+			}*/
+			
+			@GetMapping("/listDustbins")
+			public String listDustbins(Model theModel)
+			{System.out.println("**");
+				
+			List<Dustbin> theuser= userService.getDustbins();
+				
+				theModel.addAttribute("user" , theuser);
+				
+				return "listDustbin";
+			}
+			
+			
+			@GetMapping("/listDustbin")
+			public String listDustbin(@RequestParam("userId") int theId,Model theModel)
+			{System.out.println("**");
+				
+			List<Dustbin> theuser= userService.getDustbin(theId);
+				
+				theModel.addAttribute("user" , theuser);
+				
+				return "listDustbin";
 			}
 			
 }

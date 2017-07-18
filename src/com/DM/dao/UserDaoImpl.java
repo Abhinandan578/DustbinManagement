@@ -94,5 +94,39 @@ public class UserDaoImpl implements UserDao {
 		
 		theQuery.executeUpdate();
 	}
+	@Override
+	public List<Dustbin> getDustbin(int theId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query<Dustbin> theQuery = currentSession.createQuery("From Dustbin d where d.care_taker_id =:userId",Dustbin.class);
+		
+		theQuery.setParameter("userId", theId);
+		
+		List<Dustbin> users = (List<Dustbin>)theQuery.getResultList();
+		
+		
+		return users;
+		
+	}
+
+	@Override
+	public List<Dustbin> getDustbins() {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		Query<Dustbin> theQuery = currentSession.createQuery("From Dustbin",Dustbin.class);
+		
+		List<Dustbin> users = (List<Dustbin>)theQuery.getResultList();
+		
+		
+		return users;
+	}
+
+	@Override
+	public void saveDustbin(Dustbin theDustbin) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		
+		currentSession.saveOrUpdate(theDustbin);
+		
+	}
 
 }

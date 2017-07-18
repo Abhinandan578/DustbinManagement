@@ -56,7 +56,7 @@
 				<td>${temp.dustbinId}</td>
 				<td> <a href="${updateLink}">Update</a></td>
 				<td> <a href="${deleteLink}"
-					onclick = "if(!(confirm('Are you sure want to dlete this customer'))) return false">Delete</a></td>
+					onclick = "if(!(confirm('Are you sure want to delete this customer'))) return false">Delete</a></td>
 				
 			</tr>
 			 </c:forEach>

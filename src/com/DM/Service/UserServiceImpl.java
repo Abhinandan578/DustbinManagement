@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.DM.dao.UserDao;
+import com.DM.entity.Dustbin;
 import com.DM.entity.Users;
 
 @Service
@@ -59,6 +60,27 @@ public class UserServiceImpl implements UserService {
 		@Transactional
 		public void deleteUser(int theId) {
 			userDao.deleteUser(theId);
+<<<<<<< HEAD
+=======
+			
+		}
+		@Override
+		@Transactional
+		public List<Dustbin> getDustbin(int theId) {
+			List<Dustbin> theUsers = userDao.getDustbin(theId);
+			return theUsers;
+		}
+		@Override
+		@Transactional
+		public List<Dustbin> getDustbins() {
+			List<Dustbin> theUsers = userDao.getDustbins();
+			return theUsers;
+		}
+		@Override
+		@Transactional
+		public void saveDustbin(Dustbin theDustbin) {
+			userDao.saveDustbin(theDustbin);
+>>>>>>> branch 'vartika' of https://github.com/Abhinandan578/DustbinManagement.git
 			
 		}
 
